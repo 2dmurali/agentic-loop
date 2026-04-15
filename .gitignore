@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+.venv/
+.pytest_cache/
+*.log
+.env
+.DS_Store
+
+# Task run outputs (keep task definitions, exclude generated output)
+tasks/*/output/
+tasks/*/summary.md

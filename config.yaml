@@ -1,0 +1,28 @@
+default_model: ollama
+execution_mode: sequential
+max_parallel_tasks: 3
+
+models:
+  ollama:
+    provider: ollama
+    model_id: gemma4:31b-cloud
+    base_url: http://localhost:11434/v1
+    max_tokens: 32768
+  claude:
+    provider: claude
+    api_key_env: ANTHROPIC_API_KEY
+    model_id: claude-sonnet-4-20250514
+    max_tokens: 32768
+  openai:
+    provider: openai
+    api_key_env: OPENAI_API_KEY
+    model_id: gpt-4o
+    max_tokens: 32768
+
+defaults:
+  min_reviews: 1
+  max_reviews: 5
+
+logging:
+  level: INFO
+  file: agentic-loop.log

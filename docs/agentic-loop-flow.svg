@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 340" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="10" markerHeight="7" orient="auto-start-reverse">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+    <marker id="arrow-feedback" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="10" markerHeight="7" orient="auto-start-reverse">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ef4444"/>
+    </marker>
+    <marker id="arrow-approve" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="10" markerHeight="7" orient="auto-start-reverse">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#22c55e"/>
+    </marker>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="840" height="340" rx="12" fill="url(#bg)"/>
+
+  <!-- Title -->
+  <text x="420" y="38" text-anchor="middle" fill="#e2e8f0" font-size="16" font-weight="600" letter-spacing="0.5">AGENTIC LOOP — FEEDBACK CYCLE</text>
+
+  <!-- Task node -->
+  <rect x="30" y="130" width="120" height="60" rx="8" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+  <text x="90" y="157" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="500">TASK</text>
+  <text x="90" y="175" text-anchor="middle" fill="#cbd5e1" font-size="12">task.md</text>
+
+  <!-- Worker node -->
+  <rect x="210" y="115" width="150" height="90" rx="10" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="285" y="148" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="600" letter-spacing="0.5">WORKER AGENT</text>
+  <text x="285" y="168" text-anchor="middle" fill="#64748b" font-size="11">generates output</text>
+  <text x="285" y="188" text-anchor="middle" fill="#475569" font-size="10" font-style="italic">any LLM provider</text>
+
+  <!-- Reviewer node -->
+  <rect x="430" y="115" width="150" height="90" rx="10" fill="#3b1f3a" stroke="#a855f7" stroke-width="2"/>
+  <text x="505" y="148" text-anchor="middle" fill="#d8b4fe" font-size="11" font-weight="600" letter-spacing="0.5">REVIEWER AGENT</text>
+  <text x="505" y="168" text-anchor="middle" fill="#64748b" font-size="11">evaluates quality</text>
+  <text x="505" y="188" text-anchor="middle" fill="#475569" font-size="10" font-style="italic">scored feedback</text>
+
+  <!-- Decision diamond -->
+  <polygon points="670,160 720,130 770,160 720,190" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+  <text x="720" y="164" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="600">PASS?</text>
+
+  <!-- Output node -->
+  <rect x="700" y="245" width="120" height="60" rx="8" fill="#14532d" stroke="#22c55e" stroke-width="2"/>
+  <text x="760" y="270" text-anchor="middle" fill="#86efac" font-size="11" font-weight="600" letter-spacing="0.5">OUTPUT</text>
+  <text x="760" y="288" text-anchor="middle" fill="#4ade80" font-size="11">✓ approved</text>
+
+  <!-- Arrows: Task → Worker -->
+  <line x1="150" y1="160" x2="207" y2="160" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Arrows: Worker → Reviewer -->
+  <line x1="360" y1="160" x2="427" y2="160" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Arrows: Reviewer → Decision -->
+  <line x1="580" y1="160" x2="668" y2="160" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Arrows: Decision → Output (Yes) -->
+  <line x1="720" y1="190" x2="720" y2="242" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arrow-approve)"/>
+  <text x="735" y="220" fill="#22c55e" font-size="11" font-weight="600">YES</text>
+
+  <!-- Feedback loop: Decision → back to Worker (No) -->
+  <path d="M 670,160 L 640,160 Q 620,160 620,180 L 620,280 Q 620,300 600,300 L 310,300 Q 285,300 285,280 L 285,208"
+        fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow-feedback)"/>
+  <text x="450" y="292" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="600">NO — revise with scored feedback</text>
+
+  <!-- Context badge -->
+  <rect x="320" y="60" width="200" height="32" rx="16" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <text x="420" y="81" text-anchor="middle" fill="#94a3b8" font-size="11">↻ full context preserved</text>
+</svg>
