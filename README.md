@@ -4,7 +4,7 @@
 
 Agentic Loop is a lightweight orchestration framework that drives LLM outputs toward quality through structured iteration. A worker agent produces output, a reviewer agent evaluates it against defined criteria, and the loop continues — with full context preserved — until the work meets your standards.
 
-The key insight: **the worker and reviewer can be different models.** Pair a fast local model for generation with a stronger model for critique. Use Claude to review OpenAI's work. Pit two local models against each other. This cross-model review creates a competitive dynamic where the reviewer holds the worker accountable to standards no single model would enforce on its own output.
+The key insight: **the worker and reviewer can be different models with different weights.** Pair a lightweight model for fast generation with a heavier model for rigorous critique. Use Claude to review GPT's work. Mix local and cloud models. The mismatch in model sizes and architectures creates an adversarial dynamic — two models debating until the output is genuinely good, not just plausible.
 
 ---
 
@@ -31,17 +31,18 @@ Agentic Loop lets you assign **different models** to worker and reviewer roles:
 ```yaml
 # task.md frontmatter
 ---
-worker_model: ollama      # Fast local model generates drafts
-reviewer_model: claude     # Stronger model holds the quality bar
+worker_model: openai      # Lightweight model generates drafts
+reviewer_model: claude     # Different model holds the quality bar
 ---
 ```
 
 **Why this matters:**
 
-- **Adversarial quality pressure.** A model reviewing another model's work catches errors that self-review misses. Different architectures have different blind spots.
-- **Cost efficiency.** Use an inexpensive model for the heavy lifting of generation, and a premium model only for the lightweight review step.
+- **Different weights, better debate.** Models with different parameter sizes and architectures bring different perspectives. A smaller model might take shortcuts; a larger reviewer catches them. The mismatch is the feature.
+- **Adversarial quality pressure.** A model reviewing another model's work catches errors that self-review misses. Different training data means different blind spots.
 - **Honest evaluation.** A separate reviewer has no incentive to rubber-stamp its own output. It evaluates against the criteria you defined, not against what was convenient to produce.
-- **Local + Cloud hybrid.** Run the worker entirely on your hardware with Ollama, while using a cloud API only for scoring. Your content stays local; only the review requires an API call.
+- **Mix and match freely.** Pair any combination — local with cloud, Claude with GPT, two local models of different sizes. The framework is provider-agnostic.
+- **Cost efficiency.** Use an inexpensive model for the heavy lifting of generation, and a premium model only for the lightweight review step.
 
 ## Features
 
@@ -58,7 +59,7 @@ reviewer_model: claude     # Stronger model holds the quality bar
 
 ## Example Results
 
-These example tasks are included in the repo and ran on a local Ollama model (`gemma4:31b-cloud`) with no cloud API calls:
+These example tasks are included in the repo and ran using Ollama (`gemma4:31b-cloud`):
 
 | Task | Type | Iterations | Final Score | Description |
 |------|------|-----------|-------------|-------------|
@@ -74,7 +75,7 @@ The text task approved early at 10/10 on iteration 1, was forced to continue by 
 ### Prerequisites
 
 - Python 3.11+
-- An LLM provider ([Ollama](https://ollama.com) recommended for local use)
+- An LLM provider
 
 ### Install
 
@@ -276,7 +277,7 @@ agentic-loop validate
 
 ## Disclaimer
 
-This project is for **knowledge and experimental purposes**. It demonstrates agentic AI patterns and iterative refinement workflows as a learning resource. The framework may require further refinement for production use — always review and validate generated outputs, especially when using local LLMs.
+This project is for **knowledge and experimental purposes**. It demonstrates agentic AI patterns and iterative refinement workflows as a learning resource. The framework may require further refinement for production use — always review and validate generated outputs.
 
 ## License
 
